@@ -1,0 +1,96 @@
+# Arrange the given numbers in descending order
+--------------------------------------------------
+
+--------------------------------------------------
+# For Ascending
+Mydata Segment
+Array DB 02H, 03H, 09H, 07H, 00H, 01H
+count DB 05H
+Mydata Ends
+-------------
+Mycode Segment
+Assume CS : Mycode, DS : Mydata
+MOV AX, Mydata
+MOV DS, AX
+MOV DL, count
+BACk : MOV CL, DL
+LEA SI, Array
+ABC : MOV AL, [SI]
+CMP AL, [SI+1]
+JLE XYZ
+MOV BL, [SI+1]
+MOV [SI+1], AL
+MOV [SI], BL
+XYZ : INC SI
+      DEC CL
+      JNZ ABC
+      DEC DL
+      JNZ Back
+Ends
+END
+-----------------------------------------------------
+-----------------------------------------------------
+#For Descending
+Mydata Segment
+Array DB 02H, 03H, 09H, 07H, 00H, 01H
+count DB 05H
+Mydata Ends
+-------------
+Mycode Segment
+Assume CS : Mycode, DS : Mydata
+MOV AX, Mydata
+MOV DS, AX
+MOV DL, count
+BACk : MOV CL, DL
+LEA SI, Array
+ABC : MOV AL, [SI]
+CMP AL, [SI+1]
+JGE XYZ
+MOV BL, [SI+1]
+MOV [SI+1], AL
+MOV [SI], BL
+XYZ : INC SI
+      DEC CL
+      JNZ ABC
+      DEC DL
+      JNZ Back
+Ends
+END
+-----------------------------------
+working of above program : -
+1)Mydata Segment: Starts the definition of the Mydata segment.
+2)Array DB 02H, 03H, 09H, 07H, 00H, 01H: Defines an array called Array with six elements: 02H, 03H, 09H, 07H, 00H, and 01H.
+3)count DB 05H: Defines a variable called count with the value 05H (5 in decimal).
+4)Mydata Ends: Ends the definition of the Mydata segment.
+5)Mycode Segment: Starts the definition of the Mycode segment.
+6)Assume CS: Mycode, DS: Mydata: Informs the assembler that the code segment (CS) is set to Mycode and the data segment (DS) is set to Mydata.
+7)MOV AX, Mydata: Moves the address of the Mydata segment into the AX register.
+8)MOV DS, AX: Sets the data segment (DS) to the value of the AX register, establishing the Mydata segment as the current data segment.
+9)MOV DL, count: Moves the value of count into the DL register.
+10)Back:: Defines a label called Back for the outer loop.
+11)MOV CL, DL: Copies the value of the DL register (outer loop counter) into the CL register, which will control the inner loop iterations.
+12)LEA SI, Array: Loads the effective address of the Array into the SI register, setting SI to point to the first element of the array.
+13)ABC:: Defines a label called ABC for the inner loop.
+14)MOV AL, [SI]: Moves the value of the element pointed to by SI (current element) into the AL register.
+15)CMP AL, [SI+1]: Compares the value in the AL register with the value of the next element in the array (SI+1).
+16)JLE XYZ: Jumps to the XYZ label if the previous comparison result indicates that AL is smaller than or equal to the next element. / JGE XYZ: Jumps to the XYZ label if the previous comparison result indicates that AL is greater than or equal to the next element.
+17)MOV BL, [SI+1]: Moves the value of the next element in the array (SI+1) into the BL register.
+18)MOV [SI+1], AL: Moves the value in the AL register (current element) into the memory location of the next element in the array.
+19)MOV [SI], BL: Moves the value in the BL register (next element) into the memory location of the current element.
+20)XYZ:: Defines a label called XYZ to mark the end of the inner loop.
+21)INC SI: Increments the SI register to move to the next element in the array.
+22)DEC CL: Decrements the CL register (inner loop counter).
+23)JNZ ABC: Jumps to the ABC label if the previous decrement of CL did not result in zero (loop continues).
+24)DEC DL: Decrements the DL register (outer loop counter).
+25)JNZ Back: Jumps to the Back label if the previous decrement of DL did not result in zero (outer loop continues).
+26)Ends: Marks the end of the code segment.
+27)END: Marks the end of the program.
+
+----> points to be remembered : --
+i) LEA stands for effective address syntax:- LEA Reg16, [EA(16)], value inside [EA(16)] will operate as an effective address
+ii) CMP stands for compare , syntax:- CMP Reg1(8/16), Reg2(8/16) performs comparison on byte data
+iii) JLE used when destination operand is less than or equal to source operand
+iv) INC used to perform increment operation on register, value is incremented by 1
+v) DEC used to perform decrement operation on register, value is decremented by 1
+
+

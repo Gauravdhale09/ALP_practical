@@ -1,0 +1,48 @@
+# Logical Instructions
+
+Program:-
+------------------
+Mydata segment
+NUM1 DB 12H
+NUM2 DB 45H
+NUM3 DB 39H
+NUM4 DB 70H
+--------------------
+Result1 DB ?
+Result2 DB ?
+Result3 DB ?
+Result4 DB ?
+--------------------
+Mydata Ends
+--------------------
+-------------------
+Mycode Segment
+Assume CS : Mycode , DS : Mydata
+MOV AX, Mydata
+MOV DS, AX
+MOV AX, 0000H
+-------------------
+MOV AL, NUM1
+MOV BL, NUM2
+MOV CL, NUM3
+MOV DL, NUM4
+-------------------
+AND AL, BL
+OR BL, CL
+XOR CL, DL
+NOT DL
+------------------
+MOV Result1, AL
+MOV Result2, BL
+MOV Result3, CL
+MOV Result4, DL
+------------------
+
+---> Points to be remembered:-
+i) Instruction in logical group :- 1) AND 2)OR 3)XOR 4)NOT
+ii) 1)AND :- --logical AND operation between source and distination --Result will be stored in destination  --syntax: AND Reg1(8/16), Reg(8/16)
+    2)OR :- --logical OR operation between source and distination --Result will be stored in destination  --syntax: OR Reg1(8/16), Reg(8/16)
+    3)XOR :- --logical XOR operation between source and distination --Result will be stored in destination  --syntax: XOR Reg1(8/16), Reg(8/16)
+    4)NOT :- --logical NOT operation with distination --Result will be stored in destination  --syntax: NOT Reg(8/16)
+    5)TEST :- --logical TEST operation used to test source and destination operand but result not be stored  --syntax: OR Reg1(8/16), Reg(8/16) -- update the Carry flag (CF) to 0 if the result = 0
+    6)NEG :- logical NEG operation with distination --Used to calculate 2's compliment --Result will be stored in destination  --syntax: NEG Reg(8/16)

@@ -1,0 +1,26 @@
+#Division
+
+1) Two 8-bit
+
+mydata segment
+NUM1 DB 09H
+NUM2 DB 02H
+Result DW?
+mydata Ends
+mycode segment
+Assume CS : mycode, DS : mydata
+MOV AX, mydata
+MOV DS, AX
+MOV DX, 0000H
+MOV BX, 0000H
+MOV AL, NUM1
+MOV BL, NUM2
+DIV NUM2
+MOV Result, AX
+mycode Ends 
+END
+----> Points to be remember
+i) ADD instruction used to perform division operation for destination and source operands
+ii) Syntax:- DIV Reg1(8/16)
+iii) Result will always be stored in AX
+

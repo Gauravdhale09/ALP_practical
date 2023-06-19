@@ -1,0 +1,53 @@
+# Transfering Block of Data
+
+Mydata Segment
+Array1 DB 00H, 01H, 02H, 03H, 04H, 05H, 06H, 07H
+Array2 DB ?
+count DB 0AH
+Mydata Ends 
+
+--------------
+
+Mycode Segment
+Assume CS : Mycode, DS : Mydata
+MOV AX, Mydata
+MOV DS, AX
+MOV AX, 0000H
+LEA SI, Array1
+LEA DI, Array2
+MOV CL, count
+
+-------------
+
+XYZ : MOV AL, [SI]
+MOV [DI], AL
+INC SI
+INC DI
+DEC CL
+JNZ XYZ
+Ends
+END
+
+-------------
+
+Working of above TASM code : -- 1)M0V AX, Mydata: Moves the address of the Mydata segment into the AX register.
+2)MOV DS, AX: Copies the value of the AX register (address of Mydata segment) into the DS register, which sets the data segment to Mydata.
+3)MOV AX, 0000H: Clears the AX register by setting its value to 0000H (zero).
+4)LEA SI, Array1: Loads the effective address of Array1 into the SI register. SI will point to the first element of Array1.
+5)LEA DI, Array2: Loads the effective address of Array2 into the DI register. DI will point to the first element of Array2.
+6)MOV CL, count: Moves the value of the count variable into the CL register. CL will hold the number of iterations for the loop.
+7)MOV AL, [SI]: Moves the value at the memory location pointed to by SI (the current element of Array1) into the AL register.
+8)MOV [DI], AL: Moves the value in the AL register (current element of Array1) into the memory location pointed to by DI (current element of Array2).
+9)INC SI: Increments the value of SI by 1, moving it to the next element of Array1.
+10)INC DI: Increments the value of DI by 1, moving it to the next element of Array2.
+11)DEC CL: Decrements the value of CL by 1, reducing the loop iteration count.
+12)JNZ XYZ: Jumps to the XYZ label if the zero flag is not set (CL is not zero). If there are more iterations to be done, the loop continues from the MOV AL, [SI] instruction.
+13)Ends: Marks the end of the code segment.
+14)END: Marks the end of the program.
+
+---> Points to be remembered:--
+1) Instructions-- 
+i)INC :- Used to perform increment operation on register, register value is incremented by 1 , Syntax:- INC Reg1(8/16), Reg2(8/16)
+ii)DEC :- Used to perform decrement operation on register, register value is decremented by 1 , Syntax:- DEC Reg1(8/16), Reg2(8/16)
+iii)LEA :- moves the contents of the designated memory location into the target register, syntax:- LEA Reg16[EA(16)]
+e.g. LEA 0X

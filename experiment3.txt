@@ -1,0 +1,43 @@
+#Substraction
+
+1) Two 8-bit
+
+mydata segment
+NUM1 DB 10H
+NUM2 DB 20H
+Result DW?
+mydata Ends
+mycode segment
+Assume CS : mycode, DS : mydata
+MOV AX, mydata
+MOV DS, AX
+MOV AL, NUM1
+MOV BL, NUM2
+SUB AL, BL
+MOV Result, AX
+mycode Ends 
+END
+
+2) Two 16-bit
+
+mydata segment
+NUM1 DW 9488H
+NUM2 DW 8765H
+Result DW?
+mydata Ends
+mycode segment
+Assume CS : mycode, DS : mydata
+MOV AX, mydata
+MOV DS, AX
+MOV AX, NUM1
+MOV BX, NUM2
+SUB AX, BX
+MOV Result, AX
+mycode Ends 
+END
+
+----> Points to be remember
+i) ADD instruction used to perform substraction operation for destination and source operands
+ii) Syntax:- SUB destination, source
+iii) Result will be stored in the destination
+

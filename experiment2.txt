@@ -1,0 +1,43 @@
+#Addition
+
+1) Two 8-bit
+
+mydata segment
+NUM1 DB 10H
+NUM2 DB 20H
+Result DW?
+mydata Ends
+mycode segment
+Assume CS : mycode, DS : mydata
+MOV AX, mydata
+MOV DS, AX
+MOV AL, NUM1
+MOV BL, NUM2
+ADD AL, BL
+MOV Result, AX
+Ends 
+END
+
+2) Two 16-bit
+
+mydata segment
+NUM1 DB 0202H
+NUM2 DB 0408H
+Result DW?
+mydata Ends
+mycode segment
+Assume CS : mycode, DS : mydata
+MOV AX, mydata
+MOV DS, AX
+MOV AX, NUM1
+MOV BX, NUM2
+ADD AX, BX
+MOV Result, AX
+Ends 
+END
+
+----> Points to be remember
+i) ADD instruction used to perform addition operation for destination and source operands
+ii) Syntax:- ADD destination, source
+iii) Result will be stored in the destination
+
